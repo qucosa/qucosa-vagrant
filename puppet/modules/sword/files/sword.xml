@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="/opt/sword/bin/sword.war">
+	<Parameter name="project.properties" value="/opt/sword/config/properties.xml"/>
+	<Parameter name="log-config" value="/opt/sword/config/log4j.xml"/>
+</Context>
+
