@@ -7,10 +7,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "qucosa.app.dev"
   config.vm.network "private_network", type: :dhcp
 
+  config.vm.provision "shell" do |shell|
+        shell.inline = "puppet module install puppetlabs-stdlib;
+                        puppet module install puppetlabs-apt;
+                        puppet module install puppetlabs-java;
+                        puppet module install elasticsearch-elasticsearch"
+  end
+
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
-    puppet.module_path = "puppet/modules"
     puppet.manifest_file = "site.pp"
-    puppet.options = "--verbose"
+    puppet.options = [ "--modulepath=/vagrant/puppet/modules:/etc/puppet/modules", "--verbose", "--debug" ]
   end
 end
