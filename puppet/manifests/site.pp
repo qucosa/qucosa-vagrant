@@ -19,4 +19,9 @@ node 'qucosa.app.dev' {
 
   elasticsearch::instance { 'es-qucosa-dev': }
 
+  elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
+    module_dir => 'kopf',
+    instances => 'es-qucosa-dev'
+  }
+
 }
