@@ -24,4 +24,11 @@ node 'qucosa.app.dev' {
     instances => 'es-qucosa-dev'
   }
 
+  elasticsearch::plugin { 'fedora-river':
+    module_dir => 'fedora-river',
+    url => 'https://github.com/slub/elasticsearch-river-fedora/releases/download/v1.0.0/fedora-river-1.0.0.zip',
+    instances => 'es-qucosa-dev',
+    notify => Elasticsearch::Service['es-qucosa-dev']
+  }
+
 }
