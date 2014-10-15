@@ -1,0 +1,44 @@
+{
+   "fedora" : {
+      "password" : "fedoraAdmin",
+      "url" : "http://localhost:8080/fedora",
+      "username" : "fedoraAdmin"
+   },
+   "jms" : {
+      "topicFilter" : "fedora.apim.update",
+      "messageSelector" : "methodName LIKE 'modify%' OR methodName LIKE 'add%' OR methodName LIKE 'purge%' OR methodName = 'ingest'",
+      "brokerUrl" : "failover:(tcp://localhost:61616)"
+   },
+   "oai" : {
+      "url" : "http://localhost:8080/fedora/oai",
+      "poll_interval" : "5m"
+   },
+   "type" : "fedora-river",
+   "index" : {
+      "dissemination" : {
+         "sdef_pid" : "qucosa:SDef",
+         "properties" : {
+            "PUB_URN" : {
+               "index" : "not_analyzed",
+               "store" : true,
+               "type" : "string"
+            },
+            "PUB_TYPE" : {
+               "store" : true,
+               "index" : "not_analyzed",
+               "type" : "string"
+            }
+         },
+         "method" : "getIndexDocument"
+      },
+      "name" : "fedora",
+      "exclude_datastreams" : [
+         "DC",
+         "RELS-EXT",
+         "RELS-INT",
+         "POLICY",
+         "QUCOSA-XML"
+      ],
+      "pid_match" : "^qucosa:\\d+$"
+   }
+}
