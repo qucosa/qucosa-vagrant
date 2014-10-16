@@ -27,9 +27,9 @@ class qucosa::search {
   exec { 'fedora-river-meta':
     command   => 'curl -XPOST -H"content-type:application/json" -d @/vagrant/puppet/modules/qucosa/files/fedora-river.json http://localhost:9200/_river/fedora/_meta',
     provider  => 'shell',
-    subscribe => Elasticsearch::Plugin['fedora-river'],
     require   => [
-      Class['fedora'],
+      Elasticsearch::Plugin['fedora-river'],
+      Class['fedora::cmodel'],
       Exec['yellow-status']
     ]
   }
