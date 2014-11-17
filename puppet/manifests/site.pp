@@ -9,6 +9,6 @@ node 'qucosa.app.dev' {
   include fedora,
     sword,
     saxon,
-    qucosa
-
+    qucosa,
+    mets_dissemination
 }
