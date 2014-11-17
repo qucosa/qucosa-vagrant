@@ -37,7 +37,9 @@
          "RELS-EXT",
          "RELS-INT",
          "POLICY",
-         "QUCOSA-XML"
+         "QUCOSA-XML",
+         "MODS",
+         "SLUB-INFO"
       ],
       "pid_match" : "^qucosa:\\d+$"
    }
