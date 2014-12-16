@@ -8,7 +8,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "private_network", type: :dhcp
 
   config.vm.provision "shell" do |shell|
-        shell.inline = "puppet module install puppetlabs-stdlib;
+        shell.inline = "apt-get update --fix-missing;
+                        apt-get upgrade -y;
+                        puppet module install puppetlabs-stdlib;
                         puppet module install puppetlabs-apt;
                         puppet module install puppetlabs-java;
                         puppet module install elasticsearch-elasticsearch"
