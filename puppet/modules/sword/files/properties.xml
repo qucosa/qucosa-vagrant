@@ -9,7 +9,7 @@
         <host>localhost</host>
         <port>8080</port>
         <!-- Namespace for pids specified in the fedora.fcfg attribute pidNamespace-->
-        <pid_namespace>sword</pid_namespace>
+        <pid_namespace>qucosa</pid_namespace>
     </fedora>
     <general>
         <!-- Return a URI for the repository (used in atom:generator) -->
@@ -27,6 +27,7 @@
                 org.purl.sword.server.fedora.fileHandlers.FileHandler interface
             and have a default constructor
         -->
+        <handler class="org.purl.sword.server.fedora.fileHandlers.QucosaMETSFileHandler" />
         <handler class="org.purl.sword.server.fedora.fileHandlers.JpegHandler" />
         <handler class="org.purl.sword.server.fedora.fileHandlers.METSFileHandler" />
         <handler class="org.purl.sword.server.fedora.fileHandlers.ZipFileHandler" />
@@ -44,31 +45,19 @@
         <noOp>true</noOp>
         <verbose>true</verbose>
         <workspace title="Fedora SWORD Workspace">
-            <!--
-                collection_pid is the pid of the collection where deposits will end up
-            -->
-            <collection collection_pid="collection:open" mediation="true" mediationSet="true">
-                <!--
-                    This is the URL which listens for deposit requests
-                    ##COLLECTION_PID## is overwritten at runtime to contain the value of collection_pid
-                -->
+            <collection collection_pid="qucosa:all" mediation="true">
                 <deposit_url>http://qucosa.app.dev/sword/##COLLECTION_PID##</deposit_url>
-                <users/>
-                <title>Open Collection</title>
-                <abstract>This is a collection of objects which can be freely deposited to. This is aviable for the SWORD test project</abstract>
-                <policy>This collection accepts any deposit from anyone</policy>
+                <title>Qucosa General Collection</title>
+                <abstract>This is a collection of all Qucosa objects</abstract>
+                <policy>This collection accepts any deposit on behalf of the `sword` user</policy>
                 <treatment>Preservation actions may occur on submited deposits</treatment>
-                <accepts> <!-- list of mime types that are accepted by the collection -->
-                    <accept>text/xml</accept>
-                    <accept>application/zip</accept>
-                    <accept>application/x-zip-compressed</accept>
-                    <accept>application/atom+xml</accept>
-                    <accept>image/gif</accept>
-                    <accept>image/jpeg</accept>
-                    <accept>image/jpg</accept>
+                <users>
+                    <user>sword</user>
+                </users>
+                <accepts>
+                    <accept>application/vnd.qucosa.mets+xml</accept>
                 </accepts>
                 <packaging>
-                    <package quality="0.9">http://purl.org/net/sword-types/METSDSpaceSIP</package>
                     <package quality="0.9">http://www.loc.gov/METS/</package>
                 </packaging>
             </collection>
