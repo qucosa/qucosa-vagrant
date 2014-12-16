@@ -1,7 +1,7 @@
 class sword::install {
   require tomcat-server
 
-  $sword_version     = '1.4.1'
+  $sword_version     = '1.4.2'
   $sword_war_url     = "https://github.com/slub/sword-fedora/releases/download/v${sword_version}/sword-fedora-${sword_version}.war"
   $sword_home_path   = '/opt/sword'
   $sword_module_path = '/vagrant/puppet/modules/sword'
