@@ -1,7 +1,7 @@
 # Default path for exec resource
 Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
-node 'qucosa.app.dev' {
+node 'qucosa.vagrant.dev' {
 
   # installs openjdk-7-jre-headless on Debian Wheezy
   class { 'java': distribution => 'jre' }

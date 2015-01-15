@@ -18,6 +18,15 @@ VirtualBox VM containing a fully configured Qucosa Repository system.
 4. Connect your browser to http://`IP_OF_VM`:8080/fedora and see the Repository
    Description Page.
 
+## DNS support
+
+If your Vagrant has the [landrush](https://github.com/phinze/landrush) plugin installed, the machine should be available via its hostname. For example: http://qucosa.vagrant.dev:8080/fedora.
+
+However, installing `landrush` might turn out a bit tricky, since it needs to install and build additional Ruby gems. Make sure you have Ruby, G++ development and `dnsmasq` environments installed properly on your host:
+
+- [Unable to install gem - Failed to build gem native extension - cannot load such file — mkmf (LoadError)](http://stackoverflow.com/questions/13767725/unable-to-install-gem-failed-to-build-gem-native-extension-cannot-load-such).
+- [Visibility on the Host](https://github.com/phinze/landrush#visibility-on-the-host)
+
 ## Cache support
 
 The file has support for [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) to speed up package download. You can install `vagrant-cachier` simply with ```$ vagrant plugin install vagrant-cachier```. Check the project website for detailed information.
