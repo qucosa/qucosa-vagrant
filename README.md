@@ -18,6 +18,10 @@ VirtualBox VM containing a fully configured Qucosa Repository system.
 4. Connect your browser to http://`IP_OF_VM`:8080/fedora and see the Repository
    Description Page.
 
+## Cache support
+
+The file has support for [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) to speed up package download. You can install `vagrant-cachier` simply with ```$ vagrant plugin install vagrant-cachier```. Check the project website for detailed information.
+
 # Known Issues
 
 ## VirtualBox Guest Additions not installed or outdated

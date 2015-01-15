@@ -7,6 +7,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "qucosa.app.dev"
   config.vm.network "private_network", type: :dhcp
 
+  if Vagrant.has_plugin?("vagrant-cachier")
+      config.cache.scope = :box
+  end
+
   config.vm.provision "shell" do |shell|
         shell.inline = "apt-get update --fix-missing;
                         apt-get upgrade -y;
