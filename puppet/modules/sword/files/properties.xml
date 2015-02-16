@@ -2,9 +2,9 @@
     <!-- Fedora Properties the username and password for fedora are the ones supplied in the deposit and are not in this config file-->
     <fedora>
         <!-- This is the URL that should be returned to the client as a link to the object -->
-        <external_obj_url>http://qucosa.app.dev:8080/fedora/get/##PID##</external_obj_url>
+        <external_obj_url>http://qucosa.vagrant.dev:8080/fedora/get/##PID##</external_obj_url>
         <!-- This is the URL that should point to a copy of the thing the deposited -->
-        <external_ds_url>http://qucosa.app.dev:8080/fedora/get/##PID##/##DS##</external_ds_url>
+        <external_ds_url>http://qucosa.vagrant.dev:8080/fedora/get/##PID##/##DS##</external_ds_url>
         <protocol>http</protocol>
         <host>localhost</host>
         <port>8080</port>
@@ -13,7 +13,7 @@
     </fedora>
     <general>
         <!-- Return a URI for the repository (used in atom:generator) -->
-        <repository_uri>http://qucosa.app.dev/sword</repository_uri>
+        <repository_uri>http://qucosa.vagrant.dev/sword</repository_uri>
         <!-- Directory where zip files are extracted and uploads are stored before ingest. This should be an absolute path -->
         <temp_dir>/tmp</temp_dir>
         <!-- This returns the directory where the sub service documents are stored relative to the web app directory -->
@@ -46,7 +46,7 @@
         <verbose>true</verbose>
         <workspace title="Fedora SWORD Workspace">
             <collection collection_pid="qucosa:all" mediation="true">
-                <deposit_url>http://qucosa.app.dev/sword/##COLLECTION_PID##</deposit_url>
+                <deposit_url>http://qucosa.vagrant.dev/sword/##COLLECTION_PID##</deposit_url>
                 <title>Qucosa General Collection</title>
                 <abstract>This is a collection of all Qucosa objects</abstract>
                 <policy>This collection accepts any deposit on behalf of the `sword` user</policy>
