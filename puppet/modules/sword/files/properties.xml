@@ -4,7 +4,7 @@
         <!-- This is the URL that should be returned to the client as a link to the object -->
         <external_obj_url>http://qucosa.vagrant.dev:8080/fedora/get/##PID##</external_obj_url>
         <!-- This is the URL that should point to a copy of the thing the deposited -->
-        <external_ds_url>http://qucosa.vagrant.dev:8080/fedora/get/##PID##/##DS##</external_ds_url>
+        <external_ds_url>http://qucosa.vagrant.dev:8080/fedora/objects/##PID##/methods/qucosa:SDef/getMETSDissemination</external_ds_url>
         <protocol>http</protocol>
         <host>localhost</host>
         <port>8080</port>
@@ -28,10 +28,12 @@
             and have a default constructor
         -->
         <handler class="org.purl.sword.server.fedora.fileHandlers.QucosaMETSFileHandler" />
+        <!--
         <handler class="org.purl.sword.server.fedora.fileHandlers.JpegHandler" />
         <handler class="org.purl.sword.server.fedora.fileHandlers.METSFileHandler" />
         <handler class="org.purl.sword.server.fedora.fileHandlers.ZipFileHandler" />
         <handler class="org.purl.sword.server.fedora.fileHandlers.ZipMETSFileHandler" />
+        -->
     </file_handlers>
     <files>
         <!-- XML list of file extension to mime-type conversions -->
