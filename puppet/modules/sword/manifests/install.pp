@@ -1,5 +1,5 @@
 class sword::install {
-  require tomcat-server
+  include tomcat::install, tomcat::service
 
   $sword_version     = '1.5.1'
   $sword_war_url     = "https://github.com/slub/sword-fedora/releases/download/v${sword_version}/sword-fedora-${sword_version}.war"
@@ -7,7 +7,7 @@ class sword::install {
   $sword_module_path = '/vagrant/puppet/modules/sword'
 
   file { [
-    "${sword_home_path}",
+    $sword_home_path,
     "${sword_home_path}/bin",
     "${sword_home_path}/lib",
     "${sword_home_path}/log",
@@ -32,7 +32,9 @@ class sword::install {
     source => "${sword_module_path}/files/log4j.xml"
   }->
   file { '/etc/tomcat7/Catalina/localhost/sword.xml':
-    ensure => 'link',
-    target => "${sword_home_path}/bin/sword.xml"
+    ensure  => 'link',
+    target  => "${sword_home_path}/bin/sword.xml",
+    require => Class['tomcat::install'],
+    notify  => Class['tomcat::service']
   }
 }

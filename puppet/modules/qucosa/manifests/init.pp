@@ -1,4 +1,4 @@
 class qucosa {
-  include fedora
-  include qucosa::search
+  include fedora, qucosa::search
+  Class['fedora'] -> Class['qucosa::search']
 }

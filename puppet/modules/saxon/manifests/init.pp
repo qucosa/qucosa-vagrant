@@ -1,4 +1,4 @@
 class saxon {
-  include tomcat-server
-  include saxon::install
+  include tomcat, saxon::install
+  Class['tomcat'] -> Class['saxon::install']
 }

@@ -1,8 +1,13 @@
 class fedora {
-  include tomcat-server
-  include fedora::install
-  include fedora::config
-  include fedora::cmodel
-  include fedora::demo_object
+  include tomcat::service,
+    fedora::install,
+    fedora::config,
+    fedora::cmodel,
+    fedora::demo_object
+  Class['fedora::install']
+    -> Class['fedora::config']
+    -> Class['fedora::cmodel']
+    -> Class['fedora::demo_object']
+    ~> Class['tomcat::service']
 }
 

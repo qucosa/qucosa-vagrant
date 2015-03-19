@@ -1,5 +1,6 @@
 class sword {
-  include tomcat-server
-  include sword::install
-  include sword::filehandler
+  include tomcat,
+    sword::install,
+    sword::filehandler
+  Class['tomcat'] -> Class['sword::install'] -> Class['sword::filehandler']
 }

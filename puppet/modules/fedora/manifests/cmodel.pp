@@ -1,5 +1,4 @@
 class fedora::cmodel {
-
   include fedora::apim
 
   $qucosa_cmodel_version = "1.0-alpha4"
