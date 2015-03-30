@@ -9,11 +9,10 @@ class sword::install {
   file { [
     $sword_home_path,
     "${sword_home_path}/bin",
-    "${sword_home_path}/lib",
     "${sword_home_path}/log",
     "${sword_home_path}/config"
   ]:
-    ensure => 'directory',
+    ensure => directory,
     group  => 'tomcat7',
     mode   => 'g+rwx'
   }->
@@ -37,4 +36,14 @@ class sword::install {
     require => Class['tomcat::install'],
     notify  => Class['tomcat::service']
   }
+
+  # make sure the lib directory has only managed files
+  file { "${sword_home_path}/lib":
+    ensure  => directory,
+    recurse => true,
+    purge   => true,
+    group   => 'tomcat7',
+    mode    => 'g+rwx'
+  }
+
 }
