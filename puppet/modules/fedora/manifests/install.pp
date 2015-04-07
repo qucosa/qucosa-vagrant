@@ -5,8 +5,8 @@ class fedora::install {
 
   $fedora_module_path = '/vagrant/puppet/modules/fedora'
   $fedora_home_path = '/opt/fedora'
-  $fcrepo_installer_url = 'https://github.com/slub/fcrepo/releases/download/v3.8.0-slub-p1'
-  $fcrepo_installer_jar = 'fcrepo-installer-3.8.0.jar'
+  $fcrepo_installer_url = 'https://github.com/fcrepo3/fcrepo/releases/download/v3.8.1-RC2'
+  $fcrepo_installer_jar = 'fcrepo-installer-3.8.1-SNAPSHOT.jar'
 
   file { '/etc/profile.d/fedora-env.sh':
     source => "${fedora_module_path}/files/fedora-env.sh"
