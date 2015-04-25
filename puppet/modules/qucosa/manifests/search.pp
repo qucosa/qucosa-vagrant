@@ -9,7 +9,8 @@ class qucosa::search {
 
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
     module_dir => 'kopf',
-    instances  => 'es-qucosa-dev'
+    url        => 'https://github.com/lmenezes/elasticsearch-kopf/archive/v1.4.9.zip',
+    instances  => 'es-qucosa-dev',
   }
 
   elasticsearch::plugin { 'fedora-river':
