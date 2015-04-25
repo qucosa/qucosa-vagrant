@@ -1,37 +1,16 @@
 {
-   "fedora" : {
-      "password" : "fedoraAdmin",
-      "url" : "http://localhost:8080/fedora",
-      "username" : "fedoraAdmin"
-   },
+   "type" : "fedora-river",
    "jms" : {
       "topicFilter" : "fedora.apim.update",
-      "messageSelector" : "methodName LIKE 'modify%' OR methodName LIKE 'add%' OR methodName LIKE 'purge%' OR methodName = 'ingest'",
-      "brokerUrl" : "failover:(tcp://localhost:61616)"
+      "brokerUrl" : "failover:(tcp://localhost:61616)",
+      "messageSelector" : "methodName LIKE 'modify%' OR methodName LIKE 'add%' OR methodName LIKE 'purge%' OR methodName = 'ingest'"
    },
-   "oai" : {
-      "url" : "http://localhost:8080/fedora/oai",
-      "poll_interval" : "5m"
+   "fedora" : {
+      "url" : "http://localhost:8080/fedora",
+      "password" : "fedoraAdmin",
+      "username" : "fedoraAdmin"
    },
-   "type" : "fedora-river",
    "index" : {
-      "dissemination" : {
-         "sdef_pid" : "qucosa:SDef",
-         "properties" : {
-            "PUB_URN" : {
-               "index" : "not_analyzed",
-               "store" : true,
-               "type" : "string"
-            },
-            "PUB_TYPE" : {
-               "store" : true,
-               "index" : "not_analyzed",
-               "type" : "string"
-            }
-         },
-         "method" : "getIndexDocument"
-      },
-      "name" : "fedora",
       "exclude_datastreams" : [
          "DC",
          "RELS-EXT",
@@ -41,6 +20,31 @@
          "MODS",
          "SLUB-INFO"
       ],
-      "pid_match" : "^qucosa:\\d+$"
+      "dissemination" : {
+         "relevant_datastreams" : [
+            "MODS",
+            "SLUB-INFO"
+         ],
+         "properties" : {
+            "PUB_TYPE" : {
+               "store" : true,
+               "index" : "not_analyzed",
+               "type" : "string"
+            },
+            "PUB_URN" : {
+               "index" : "not_analyzed",
+               "store" : true,
+               "type" : "string"
+            }
+         },
+         "sdef_pid" : "qucosa:SDef",
+         "method" : "getIndexDocument"
+      },
+      "pid_match" : "^qucosa:\\d+$",
+      "name" : "fedora"
+   },
+   "oai" : {
+      "url" : "http://localhost:8080/fedora/oai",
+      "poll_interval" : "5m"
    }
 }
