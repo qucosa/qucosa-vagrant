@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         shell.inline = "apt-get update --fix-missing;
                         apt-get upgrade -y;
                         puppet module install puppetlabs-stdlib;
-                        puppet module install puppetlabs-apt;
+                        puppet module install puppetlabs-apt --force -v 1.8.0;
                         puppet module install puppetlabs-java;
                         puppet module install elasticsearch-elasticsearch"
   end
