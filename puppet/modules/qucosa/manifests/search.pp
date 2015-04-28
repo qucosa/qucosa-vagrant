@@ -22,7 +22,7 @@ class qucosa::search {
   exec { 'yellow-status':
     command  => '/vagrant/puppet/modules/qucosa/files/elasticsearch-cluster-status.sh localhost yellow',
     provider => 'shell',
-    require  => Service['elasticsearch-es-qucosa-dev']
+    require  => Elasticsearch::Instance['es-qucosa-dev']
   }
 
   exec { 'fedora-river-meta':
@@ -30,8 +30,9 @@ class qucosa::search {
     provider  => 'shell',
     require   => [
       Elasticsearch::Plugin['fedora-river'],
-      Class['fedora::cmodel'],
-      Exec['yellow-status']
+      Exec['yellow-status'],
+      Class['fedora::apim'],
+      Class['fedora::cmodel']
     ]
   }
 
