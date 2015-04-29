@@ -1,5 +1,6 @@
 class sword::install {
-  include tomcat::install, tomcat::service
+  require tomcat::install
+  include tomcat::service
 
   $sword_version     = '1.5.1'
   $sword_war_url     = "https://github.com/slub/sword-fedora/releases/download/v${sword_version}/sword-fedora-${sword_version}.war"
@@ -33,7 +34,6 @@ class sword::install {
   file { '/etc/tomcat7/Catalina/localhost/sword.xml':
     ensure  => 'link',
     target  => "${sword_home_path}/bin/sword.xml",
-    require => Class['tomcat::install'],
     notify  => Class['tomcat::service']
   }
 

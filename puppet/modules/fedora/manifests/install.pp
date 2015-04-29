@@ -1,7 +1,6 @@
 class fedora::install {
-  include tomcat::install, tomcat::service
-
   require tomcat::install
+  include tomcat::service
 
   $fedora_module_path = '/vagrant/puppet/modules/fedora'
   $fedora_home_path = '/opt/fedora'

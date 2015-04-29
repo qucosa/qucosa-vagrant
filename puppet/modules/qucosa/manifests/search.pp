@@ -1,4 +1,5 @@
 class qucosa::search {
+  require fedora::install
 
   class { 'elasticsearch':
     manage_repo  => true,
@@ -19,20 +20,17 @@ class qucosa::search {
     instances  => 'es-qucosa-dev'
   }
 
-  exec { 'yellow-status':
-    command  => '/vagrant/puppet/modules/qucosa/files/elasticsearch-cluster-status.sh localhost yellow',
-    provider => 'shell',
-    require  => Elasticsearch::Instance['es-qucosa-dev']
-  }
-
   exec { 'fedora-river-meta':
     command   => 'curl -XPOST -H"content-type:application/json" -d @/vagrant/puppet/modules/qucosa/files/fedora-river.json http://localhost:9200/_river/fedora/_meta',
     provider  => 'shell',
+    onlyif    => [
+      '/vagrant/puppet/modules/fedora/files/fedora-apim-isalive.sh localhost',
+      '/vagrant/puppet/modules/qucosa/files/elasticsearch-cluster-status.sh localhost yellow',
+      'curl -s -o /dev/null -w "%{http_code}\n" localhost:9200/_river/fedora/_status | grep -v 200',
+    ],
     require   => [
-      Elasticsearch::Plugin['fedora-river'],
-      Exec['yellow-status'],
-      Class['fedora::apim'],
-      Class['fedora::cmodel']
+      Elasticsearch::Instance['es-qucosa-dev'],
+      Elasticsearch::Plugin['fedora-river']
     ]
   }
 
