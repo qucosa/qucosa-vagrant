@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="/opt/sword/bin/sword.war">
+<Context docBase="/opt/sword/bin/sword-<%= @sword_version %>.war">
     <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
         virtualClasspath="/opt/sword/lib/*.jar"/>
     <Parameter name="project.properties" value="/opt/sword/config/properties.xml" override="false"/>

@@ -2,7 +2,7 @@ class sword::install {
   require tomcat::install
   include tomcat::service
 
-  $sword_version     = '1.5.1'
+  $sword_version     = '1.5.2'
   $sword_war_url     = "https://github.com/slub/sword-fedora/releases/download/v${sword_version}/sword-fedora-${sword_version}.war"
   $sword_home_path   = '/opt/sword'
   $sword_module_path = '/vagrant/puppet/modules/sword'
@@ -18,12 +18,12 @@ class sword::install {
     mode   => 'g+rwx'
   }->
   exec { 'download-sword':
-    command => "wget ${sword_war_url} -O sword.war",
+    command => "wget ${sword_war_url} -O sword-${sword_version}.war",
     cwd     => "${sword_home_path}/bin",
-    creates => "${sword_home_path}/bin/sword.war"
+    creates => "${sword_home_path}/bin/sword-${sword_version}.war"
   }->
   file { "${sword_home_path}/bin/sword.xml":
-    source => "${sword_module_path}/files/sword.xml"
+    content => template('sword/sword.xml.erb')
   }->
   file { "${sword_home_path}/config/properties.xml":
     source => "${sword_module_path}/files/properties.xml"
