@@ -16,7 +16,7 @@ class qucosa::search {
 
   elasticsearch::plugin { 'fedora-river':
     module_dir => 'fedora-river',
-    url        => 'https://github.com/slub/elasticsearch-river-fedora/releases/download/v1.1.0/fedora-river-1.1.0.zip',
+    url        => 'https://github.com/slub/elasticsearch-river-fedora/releases/download/v1.1.1/fedora-river-1.1.1.zip',
     instances  => 'es-qucosa-dev'
   }
 
