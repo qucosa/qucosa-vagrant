@@ -51,10 +51,11 @@
                 <deposit_url>http://qucosa.vagrant.dev/sword/##COLLECTION_PID##</deposit_url>
                 <title>Qucosa General Collection</title>
                 <abstract>This is a collection of all Qucosa objects</abstract>
-                <policy>This collection accepts any deposit on behalf of the `sword` user</policy>
+                <policy>This collection accepts any deposit on behalf of the users `sword` and `all`</policy>
                 <treatment>Preservation actions may occur on submited deposits</treatment>
                 <users>
                     <user>sword</user>
+                    <user>all</user>
                 </users>
                 <accepts>
                     <accept>application/vnd.qucosa.mets+xml</accept>
