@@ -1,7 +1,7 @@
 class fedora::cmodel {
   require fedora::install
 
-  $qucosa_cmodel_version = "1.0.0"
+  $qucosa_cmodel_version = "1.0.2"
   $qucosa_cmodel_url = "https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/${qucosa_cmodel_version}.tar.gz"
   $fedora_home_path = "/opt/fedora"
   $fedora_module_path = "/vagrant/puppet/modules/fedora"
