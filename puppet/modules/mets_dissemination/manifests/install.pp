@@ -12,13 +12,13 @@ class mets_dissemination::install {
     creates => "${fedora_home_path}/install/mets-${mets_version}.war",
     require => Class['fedora::install']
   }->
-  file { "${fedora_home_path}/install/dissemination.xml":
+  file { "${fedora_home_path}/install/mets.xml":
     ensure  => file,
     content => template('mets_dissemination/dissemination.xml.erb')
   }->
-  file { '/etc/tomcat7/Catalina/localhost/dissemination.xml':
+  file { '/etc/tomcat7/Catalina/localhost/mets.xml':
     ensure  => 'link',
-    target  => "${fedora_home_path}/install/dissemination.xml",
+    target  => "${fedora_home_path}/install/mets.xml",
     require => Class['tomcat::install'],
     notify  => Class['tomcat::service']
   }
