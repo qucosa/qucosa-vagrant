@@ -1,7 +1,7 @@
 class mets_dissemination::install {
   include fedora::install, tomcat::install, tomcat::service
 
-  $mets_version = '1.0.4'
+  $mets_version = '1.1.0'
   $mets_war_url = "https://github.com/qucosa/qucosa-fcrepo-metsdisseminator/releases/download/v${mets_version}/qucosa-metsdisseminator-${mets_version}.war"
   $mets_module_path = '/vagrant/puppet/modules/mets_dissemination'
   $fedora_home_path = '/opt/fedora'
