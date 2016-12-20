@@ -1,0 +1,36 @@
+---
+environment: qucosa.vagrant.dev
+
+classes:
+  - roles::qucosa::appserver
+  - roles::qucosa::swordserver
+  - roles::qucosa::database
+  - roles::qucosa::oaiprovider
+  - roles::qucosa::search
+
+fcrepo3::fedora_serverHost: qucosa.vagrant.dev
+fcrepo3::database_driver: included
+fcrepo3::database_jdbcDriverClass: org.postgresql.Driver
+fcrepo3::database_jdbcURL: jdbc:postgresql://qucosa.vagrant.dev/fedora3
+fcrepo3::database_username: fedoraAdmin
+fcrepo3::database_password: fedoraAdmin
+fcrepo3::database: postgresql
+
+swordapp::deposit_url: "http://qucosa.vagrant.dev:8080/sword/##COLLECTION_PID##"
+swordapp::external_ds_url: "http://qucosa.vagrant.dev:8080/fedora/objects/##PID##/methods/qucosa:SDef/getMETSDissemination"
+swordapp::fedora_host: localhost
+swordapp::fedora_pid_namespace: qucosa
+
+oaiprovider::driver_fedora_baseUrl: "http://qucosa.vagrant.dev:8080/fedora"
+oaiprovider::driver_fedora_identify: "http://qucosa.vagrant.dev:8080/fedora/get/qucosa:OAI/Identify"
+oaiprovider::proai_validate_updates: false
+
+profiles::qucosa::elasticsearch::elasticsearch_instance: es-qucosa-dev
+profiles::qucosa::elasticsearch::elasticsearch_java_install: false
+profiles::qucosa::elasticsearch::fedora_url: http://qucosa.vagrant.dev:8080/fedora
+profiles::qucosa::elasticsearch::jms_broker_url: failover:(tcp://qucosa.vagrant.dev:61616)
+
+profiles::qucosa::fcrepo3::kitodo_publication_api: http://qucosa.vagrant.dev/api
+profiles::qucosa::fcrepo3::qucosa_purl_url: http://qucosa.vagrant.dev/id
+profiles::qucosa::fcrepo3::use_nas: false
+

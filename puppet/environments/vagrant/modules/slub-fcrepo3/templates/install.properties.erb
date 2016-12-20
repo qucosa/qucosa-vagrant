@@ -1,0 +1,46 @@
+#Install Options
+apia.auth.required=<%= @apia_auth_required %>
+apia.ssl.required=<%= @apia_ssl_required %>
+apim.ssl.required=<%= @apim_ssl_required %>
+
+database.driver=<%= @database_driver %>
+database.jdbcDriverClass=<%= @database_jdbcDriverClass %>
+database.jdbcURL=<%= @database_jdbcURL %>
+database.password=<%= @database_password %>
+database.username=<%= @database_username %>
+database=<%= @database %>
+
+deploy.local.services=<%= @deploy_local_services %>
+
+fedora.admin.pass=<%= @fedora_admin_password %>
+fedora.home=<%= @fedora_home %>
+fedora.serverContext=<%= @fedora_serverContext %>
+fedora.serverHost=<%= @fedora_serverHost %>
+
+fesl.authz.enabled=<%= @fesl_authz_enabled %>
+
+install.type=custom
+
+keystore.file=included
+
+llstore.type=akubra-fs
+
+messaging.enabled=<%= @messaging_enabled %>
+messaging.uri=<%= @messaging_uri %>
+
+ri.enabled=<%= @ri_enabled %>
+
+servlet.engine=existingTomcat
+
+ssl.available=<%= @ssl_available %>
+
+tomcat.home=<%= @tomcat_home %>
+tomcat.http.port=<%= @tomcat_http_port %>
+tomcat.shutdown.port=<%= @tomcat_shutdown_port %>
+tomcat.ssl.port=<%= @tomcat_ssl_port %>
+
+unattended=true
+
+upstream.auth.enabled=<%= @upstream_auth_enabled %>
+
+xacml.enabled=<%= @xacml_enabled %>

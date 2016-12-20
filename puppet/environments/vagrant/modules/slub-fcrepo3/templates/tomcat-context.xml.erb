@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/<%= @path %>" docBase="<%= @docBase %>">
+    <% @parameters.each_pair do |key, value| %>
+        <Parameter name="<%= key %>" value="<%= value %>" override="false"/>
+
+    <% end %>
+</Context>

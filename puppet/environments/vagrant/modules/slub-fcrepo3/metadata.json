@@ -1,0 +1,14 @@
+{
+  "name": "slub-fcrepo3",
+  "version": "0.2.0",
+  "author": "claussni",
+  "summary": "Manages Fedora Commons 3.",
+  "license": "Apache 2.0",
+  "source": "https://git.slub-dresden.de/puppet/slub-fcrepo3.git",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": [
+    { "name": "puppetlabs-concat", "version_requirement": ">=1.2.1" }
+  ]
+}
+

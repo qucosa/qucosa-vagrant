@@ -1,0 +1,25 @@
+                    <collection
+                        collection_pid="<%= @pid %>"
+                        mediation="<%= @mediation %>">
+
+                        <deposit_url><%= @deposit_url %></deposit_url>
+                        <title><%= @title %></title>
+                        <abstract><%= @abstract %></abstract>
+                        <policy><%= @policy %></policy>
+                        <treatment><%= @treatment %></treatment>
+                        <users>
+                            <% @users.each do |name| -%>
+                                <user><%= name %></user>
+                            <% end -%>
+                        </users>
+                        <accepts>
+                            <% @accepts.each do |mediatype| -%>
+                                <accept><%= mediatype %></accept>
+                            <% end -%>
+                        </accepts>
+                        <packaging>
+                            <% @packaging.each do |packagetype| -%>
+                                <package quality="0.9"><%= packagetype %></package>
+                            <% end -%>
+                       </packaging>
+                    </collection>

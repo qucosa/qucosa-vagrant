@@ -1,0 +1,13 @@
+################################################
+# Fedora Driver: Metadata Format Configuration #
+################################################
+<%
+    formats = ""
+    scope.compiler.catalog.vertices.each do |resource|
+        if resource.type == "Oaiprovider::Metadataformat"
+            formats << resource.title << " "
+        end
+    end
+%>
+driver.fedora.md.formats = <%= formats -%>
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="qucosa:OAI"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+    <foxml:objectProperties>
+        <foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+        <foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="Qucosa OAI Definitions"/>
+        <foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE=""/>
+        <foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2016-03-21T12:28:13.743Z"/>
+        <foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2016-03-21T12:32:25.972Z"/>
+    </foxml:objectProperties>
+    <foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+        <foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2016-03-21T12:28:13.743Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+            <foxml:xmlContent>
+                <audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+                    <audit:record ID="AUDREC1">
+                        <audit:process type="Fedora API-M"/>
+                        <audit:action>addDatastream</audit:action>
+                        <audit:componentID>Identify</audit:componentID>
+                        <audit:responsibility>fedoraAdmin</audit:responsibility>
+                        <audit:date>2016-03-21T12:32:25.972Z</audit:date>
+                        <audit:justification></audit:justification>
+                    </audit:record>
+                </audit:auditTrail>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+    <foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+        <foxml:datastreamVersion ID="DC1.0" LABEL="Dublin Core Record for this object" CREATED="2016-03-21T12:28:13.743Z" MIMETYPE="text/xml" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" SIZE="385">
+            <foxml:xmlContent>
+                <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+                    <dc:title>Qucosa OAI Definitions</dc:title>
+                    <dc:identifier>qucosa:OAI</dc:identifier>
+                </oai_dc:dc>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+    <foxml:datastream ID="Identify" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+        <foxml:datastreamVersion ID="Identify.0" LABEL="Information about the repository" CREATED="2016-03-21T12:32:25.972Z" MIMETYPE="text/xml" SIZE="2489">
+            <foxml:xmlContent>
+                <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/          http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+                    <responseDate>2002-02-08T12:00:01Z</responseDate>
+                    <request verb="Identify">http://memory.loc.gov/cgi-bin/oai</request>
+                    <Identify>
+                        <repositoryName>Qucosa</repositoryName>
+                        <baseURL>http://www.qucosa.de/oai</baseURL>
+                        <protocolVersion>2.0</protocolVersion>
+                        <adminEmail>qucosa@slub-dresden.de</adminEmail>
+                        <earliestDatestamp>2010-06-09</earliestDatestamp>
+                        <deletedRecord>persistent</deletedRecord>
+                        <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>
+                        <compression>deflate</compression>
+                        <description>
+                            <oai-identifier xmlns="http://www.openarchives.org/OAI/2.0/oai-identifier" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai-identifier http://www.openarchives.org/OAI/2.0/oai-identifier.xsd">
+                                <scheme xmlns="http://www.openarchives.org/OAI/2.0/">oai</scheme>
+                                <repositoryIdentifier xmlns="http://www.openarchives.org/OAI/2.0/">qucosa.de</repositoryIdentifier>
+                                <delimiter xmlns="http://www.openarchives.org/OAI/2.0/">:</delimiter>
+                                <sampleIdentifier xmlns="http://www.openarchives.org/OAI/2.0/">oai:qucosa.de:bsz:14-qucosa-23155</sampleIdentifier>
+                            </oai-identifier>
+                        </description>
+                    </Identify>
+                </OAI-PMH>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+</foxml:digitalObject>

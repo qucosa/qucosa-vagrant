@@ -1,0 +1,95 @@
+#
+#                        Proai Configuration 
+#                 ================================
+
+##############################
+# Front-End OAI-PMH Behavior #
+##############################
+
+proai.secondsBetweenRequests = 600
+proai.incompleteRecordListSize = 250
+proai.incompleteIdentifierListSize = 500
+proai.incompleteSetListSize = 500
+
+############################
+# Back-End Update Behavior #
+############################
+
+proai.driverPollSeconds = 120
+proai.driverPollingEnabled = true
+proai.maxWorkers = 5
+proai.maxWorkBatchSize = 10
+proai.maxFailedRetries = 3
+proai.maxCommitQueueSize = 120
+proai.maxRecordsPerTransaction = 60
+proai.validateUpdates = <%= @validate_updates %>
+
+##########################
+# File Storage Locations #
+##########################
+
+proai.cacheBaseDir = <%= @home_dir %>/cache
+proai.sessionBaseDir = <%= @home_dir %>/sessions
+proai.schemaDir = <%= @home_dir %>/schemas
+
+##################################
+# Primary Database Configuration #
+##################################
+
+proai.db.url = jdbc:mckoi:local:/<%= @config_dir %>/mckoi.conf?create_or_boot=true
+proai.db.driverClassName = com.mckoi.JDBCDriver
+
+proai.db.mySQLResultTrickling = false
+
+proai.db.username        = proai
+proai.db.password        = proai
+
+###################################
+# Advanced Database Configuration #
+###################################
+
+proai.db.maxActive = 16
+proai.db.maxWait = 5000
+
+com.mckoi.JDBCDriver.ddlConverter            = proai.util.McKoiDDLConverter
+com.mysql.jdbc.Driver.ddlConverter           = proai.util.MySQLDDLConverter
+oracle.jdbc.driver.OracleDriver.ddlConverter = proai.util.OracleDDLConverter
+org.postgresql.Driver.ddlConverter           = proai.util.PostgresDDLConverter
+
+com.mckoi.JDBCDriver.backslashIsEscape            = true
+com.mysql.jdbc.Driver.backslashIsEscape           = true
+oracle.jdbc.driver.OracleDriver.backslashIsEscape = false
+org.postgresql.Driver.backslashIsEscape           = true
+
+###################################
+# Fedora Driver: General Settings #
+###################################
+
+proai.driverClassName = oaiprovider.driver.FedoraOAIDriver
+
+driver.fedora.queryFactory = oaiprovider.driver.ITQLQueryFactory
+driver.fedora.baseURL = <%= @fedora_url %>
+driver.fedora.user = <%= @fedora_user %>
+driver.fedora.pass = <%= @fedora_pass %>
+driver.fedora.queryConnectionTimeout = 30
+driver.fedora.querySocketTimeout = 600
+driver.fedora.disseminationConnectionTimeout = 30
+driver.fedora.disseminationSocketTimeout = 120
+driver.fedora.identify = <%= @fedora_url %>/get/qucosa:OAI/Identify
+driver.fedora.itemID = http://www.openarchives.org/OAI/2.0/itemID
+
+#########################################
+# Fedora Driver: Advanced Configuration #
+#########################################
+
+driver.fedora.deleted = info:fedora/fedora-system:def/model#state
+
+###############################################
+# Fedora Driver: Set Membership Configuration #
+###############################################
+
+driver.fedora.setSpec = http://www.openarchives.org/OAI/2.0/setSpec
+driver.fedora.setSpec.name = http://www.openarchives.org/OAI/2.0/setName
+driver.fedora.setSpec.desc.dissType = info:fedora/*/SetInfo.xml
+driver.fedora.itemSetSpecPath = $item <info:fedora/fedora-system:def/relations-external#isMemberOf> $set $set <http://www.openarchives.org/OAI/2.0/setSpec> $setSpec
+
