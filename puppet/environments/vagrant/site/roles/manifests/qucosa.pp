@@ -16,11 +16,6 @@ class roles::qucosa {
     notice('No network interfaces configured in ENC')
   }
 
-  # Configure puppet agent prior to everything
-  class { 'profiles::puppet::agent':
-    stage => 'pre-main'
-  }
-
   # Configure VM Guest Additions if necessary
   case $::productname {
     'VMware Virtual Platform': { include profiles::vmware::guest }

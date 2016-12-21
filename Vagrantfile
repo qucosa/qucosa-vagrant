@@ -19,6 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.network :forwarded_port, guest:8080, host:4711
   end
 
+  config.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus   = 2
+  end
+
   config.vm.synced_folder "puppet/environments/vagrant", "/etc/puppetlabs/code/environments/vagrant"
 
   config.vm.provision "bootstrap", type:"shell" do |shell|
@@ -37,8 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                         librarian-puppet install --verbose"
   end
 
-  config.vm.provision "puppet", type:"shell" do |shell|
-        shell.inline = "puppet apply --verbose --debug \
+  config.vm.provision "puppet", type:"shell", run:"never" do |shell|
+        shell.inline = "puppet apply --verbose \
                         /etc/puppetlabs/code/environments/vagrant/manifests/site.pp \
                         --environmentpath=/etc/puppetlabs/code/environments/ --environment=vagrant"
   end
