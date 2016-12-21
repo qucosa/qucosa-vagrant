@@ -24,8 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "bootstrap", type:"shell" do |shell|
         shell.inline = "apt-get update --fix-missing &&
                         apt-get upgrade -y &&
-                        apt-get install git &&
-                        /opt/puppetlabs/puppet/bin/gem install librarian-puppet
+                        apt-get install git -y &&
+                        /opt/puppetlabs/puppet/bin/gem install librarian-puppet &&
                         ln -fs ../puppet/bin/librarian-puppet /opt/puppetlabs/bin/librarian-puppet"
   end
 
