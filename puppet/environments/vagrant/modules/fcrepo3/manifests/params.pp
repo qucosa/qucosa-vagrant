@@ -30,7 +30,7 @@ class fcrepo3::params {
   $fesl_authz_enabled = false
 
   $messaging_enabled = true
-  $messaging_uri     = "vm\:(broker\:(tcp\://${fedora_serverHost}\:61616))"
+  $messaging_uri     = "vm:(broker:(tcp://${fedora_serverHost}:61616))"
 
   $ri_enabled = true
 
