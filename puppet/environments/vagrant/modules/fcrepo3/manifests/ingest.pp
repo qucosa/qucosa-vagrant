@@ -3,7 +3,7 @@ define fcrepo3::ingest (
     $format,
     $type,
 
-    $context         = $fcrepo3::serverContext,
+    $context         = $fcrepo3::fedora_serverContext,
     $log             = undef,
     $path            = $title,
     $pid             = '*',
