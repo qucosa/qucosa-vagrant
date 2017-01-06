@@ -27,9 +27,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "puppet/environments/vagrant", "/etc/puppetlabs/code/environments/vagrant"
 
   config.vm.provision "bootstrap", type:"shell" do |shell|
-        shell.inline = "apt-get update --fix-missing &&
+        shell.inline = "apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 7F438280EF8D349F &&
+                        apt-get update --fix-missing &&
                         apt-get upgrade -y &&
-                        apt-get install git -y &&
+                        apt-get install git ruby -y &&
                         /opt/puppetlabs/puppet/bin/gem install librarian-puppet &&
                         ln -fs ../puppet/bin/librarian-puppet /opt/puppetlabs/bin/librarian-puppet"
   end
