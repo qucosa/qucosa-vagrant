@@ -1,23 +1,23 @@
 #Install Options
-apia.auth.required=<%= @apia_auth_required %>
-apia.ssl.required=<%= @apia_ssl_required %>
-apim.ssl.required=<%= @apim_ssl_required %>
+apia.auth.required=<%= scope['fcrepo3::apia_auth_required'] %>
+apia.ssl.required=<%= scope['fcrepo3::apia_ssl_required'] %>
+apim.ssl.required=<%= scope['fcrepo3::apim_ssl_required'] %>
 
-database.driver=<%= @database_driver %>
-database.jdbcDriverClass=<%= @database_jdbcDriverClass %>
-database.jdbcURL=<%= @database_jdbcURL %>
-database.password=<%= @database_password %>
-database.username=<%= @database_username %>
-database=<%= @database %>
+database.driver=<%= scope['fcrepo3::database_driver'] %>
+database.jdbcDriverClass=<%= scope['fcrepo3::database_jdbcDriverClass'] %>
+database.jdbcURL=<%= scope['fcrepo3::database_jdbcURL'] %>
+database.password=<%= scope['fcrepo3::database_password'] %>
+database.username=<%= scope['fcrepo3::database_username'] %>
+database=<%= scope['fcrepo3::database'] %>
 
-deploy.local.services=<%= @deploy_local_services %>
+deploy.local.services=<%= scope['fcrepo3::deploy_local_services'] %>
 
-fedora.admin.pass=<%= @fedora_admin_password %>
-fedora.home=<%= @fedora_home %>
-fedora.serverContext=<%= @fedora_serverContext %>
-fedora.serverHost=<%= @fedora_serverHost %>
+fedora.admin.pass=<%= scope['fcrepo3::fedora_admin_password'] %>
+fedora.home=<%= scope['fcrepo3::fedora_home'] %>
+fedora.serverContext=<%= scope['fcrepo3::fedora_serverContext'] %>
+fedora.serverHost=<%= scope['fcrepo3::fedora_serverHost'] %>
 
-fesl.authz.enabled=<%= @fesl_authz_enabled %>
+fesl.authz.enabled=<%= scope['fcrepo3::fesl_authz_enabled'] %>
 
 install.type=custom
 
@@ -25,22 +25,22 @@ keystore.file=included
 
 llstore.type=akubra-fs
 
-messaging.enabled=<%= @messaging_enabled %>
-messaging.uri=<%= @messaging_uri %>
+messaging.enabled=<%= scope['fcrepo3::messaging_enabled'] %>
+messaging.uri=<%= scope['fcrepo3::messaging_uri'] %>
 
-ri.enabled=<%= @ri_enabled %>
+ri.enabled=<%= scope['fcrepo3::ri_enabled'] %>
 
 servlet.engine=existingTomcat
 
-ssl.available=<%= @ssl_available %>
+ssl.available=<%= scope['fcrepo3::ssl_available'] %>
 
-tomcat.home=<%= @tomcat_home %>
-tomcat.http.port=<%= @tomcat_http_port %>
-tomcat.shutdown.port=<%= @tomcat_shutdown_port %>
-tomcat.ssl.port=<%= @tomcat_ssl_port %>
+tomcat.home=<%= scope['fcrepo3::tomcat_home'] %>
+tomcat.http.port=<%= scope['fcrepo3::tomcat_http_port'] %>
+tomcat.shutdown.port=<%= scope['fcrepo3::tomcat_shutdown_port'] %>
+tomcat.ssl.port=<%= scope['fcrepo3::tomcat_ssl_port'] %>
 
 unattended=true
 
-upstream.auth.enabled=<%= @upstream_auth_enabled %>
+upstream.auth.enabled=<%= scope['fcrepo3::upstream_auth_enabled'] %>
 
-xacml.enabled=<%= @xacml_enabled %>
+xacml.enabled=<%= scope['fcrepo3::xacml_enabled'] %>
