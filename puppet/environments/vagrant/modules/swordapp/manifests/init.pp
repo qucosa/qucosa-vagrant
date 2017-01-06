@@ -11,7 +11,6 @@ class swordapp (
 
   $sword_home     = $swordapp::params::sword_home,
   $sword_version  = $swordapp::params::sword_version,
-  $sword_war_url  = $swordapp::params::sword_war_url,
 
   $tomcat_etc     = $swordapp::params::tomcat_etc,
   $tomcat_service = $swordapp::params::tomcat_service
@@ -27,7 +26,6 @@ class swordapp (
   class { 'swordapp::install':
     sword_home     => $sword_home,
     sword_version  => $sword_version,
-    sword_war_url  => $sword_war_url,
     tomcat_service => $tomcat_service
   }
 
