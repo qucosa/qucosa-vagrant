@@ -28,7 +28,7 @@ class profiles::qucosa::fcrepo3(
   class { 'profiles::tomcat':
     package => 'tomcat7',
     service => 'tomcat7',
-    jvmopts => 'JAVA_OPTS="-Djava.awt.headless=true -Xms2048m -Xmx2048m -XX:+UseConcMarkSweepGC -XX:MaxPermSize=512m"'
+    jvmopts => 'JAVA_OPTS="-Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:+UseConcMarkSweepGC -XX:MaxPermSize=512m"'
   }
 
   if $use_nas {
