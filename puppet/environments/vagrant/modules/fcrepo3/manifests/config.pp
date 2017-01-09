@@ -1,5 +1,9 @@
 class fcrepo3::config {
 
+  anchor { 'fcrepo3::config::_begin': }
+  -> Fcrepo3::User <||>
+  -> anchor { 'fcrepo3::config::_end': }
+
   $fedora_users_xml = "${fcrepo3::fedora_home}/server/config/fedora-users.xml"
 
   concat { $fedora_users_xml:

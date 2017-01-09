@@ -44,8 +44,15 @@ class fcrepo3 (
 
 ) inherits fcrepo3::params {
 
-  include fcrepo3::installer,
-    fcrepo3::config
+  include fcrepo3::installer
+  include fcrepo3::config
+
+  anchor { 'fcrepo3::_begin': }
+  -> Class['fcrepo3::installer']
+  -> Class['fcrepo3::config']
+  -> Fcrepo3::Service <||>
+  -> Fcrepo3::Ingest <||>
+  -> anchor { 'fcrepo3::_end': }
 
   fcrepo3::user { 'fedoraAdmin':
     password => $fcrepo3::fedora_admin_password,
