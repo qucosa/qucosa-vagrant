@@ -5,7 +5,7 @@ classes:
   - roles::qucosa::appserver
   - roles::qucosa::swordserver
   - roles::qucosa::database
-  - roles::qucosa::oaiprovider
+#  - roles::qucosa::oaiprovider
   - roles::qucosa::search
 
 fcrepo3::fedora_serverHost: qucosa.vagrant.dev
@@ -21,9 +21,9 @@ swordapp::external_ds_url: "http://qucosa.vagrant.dev:8080/fedora/objects/##PID#
 swordapp::fedora_host: localhost
 swordapp::fedora_pid_namespace: qucosa
 
-oaiprovider::driver_fedora_baseUrl: "http://qucosa.vagrant.dev:8080/fedora"
-oaiprovider::driver_fedora_identify: "http://qucosa.vagrant.dev:8080/fedora/get/qucosa:OAI/Identify"
-oaiprovider::proai_validate_updates: false
+# oaiprovider::driver_fedora_baseUrl: "http://qucosa.vagrant.dev:8080/fedora"
+# oaiprovider::driver_fedora_identify: "http://qucosa.vagrant.dev:8080/fedora/get/qucosa:OAI/Identify"
+# oaiprovider::proai_validate_updates: false
 
 profiles::qucosa::elasticsearch::elasticsearch_instance: es-qucosa-dev
 profiles::qucosa::elasticsearch::elasticsearch_java_install: false
