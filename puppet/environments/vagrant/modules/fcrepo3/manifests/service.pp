@@ -49,7 +49,6 @@ define fcrepo3::service (
     path    => "${fcrepo3::tomcat_home}/conf/Catalina/localhost/${title}.xml",
     content => template('fcrepo3/tomcat-context.xml.erb'),
     require => Class['fcrepo3::installer'],
-    notify  => Service[$fcrepo3::tomcat_service]
   }
 
 }

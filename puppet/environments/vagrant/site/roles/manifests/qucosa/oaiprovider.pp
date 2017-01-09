@@ -1,3 +1,5 @@
 class roles::qucosa::oaiprovider inherits roles::qucosa {
-  include profiles::qucosa::oaiprovider
+  class { 'profiles::qucosa::oaiprovider':
+    require => Class['profiles::qucosa::fcrepo3']
+  }
 }

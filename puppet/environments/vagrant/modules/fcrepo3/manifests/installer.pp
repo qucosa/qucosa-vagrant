@@ -32,7 +32,9 @@ class fcrepo3::installer {
     ensure    => 'present',
     content   => template('fcrepo3/fedora.xml.erb'),
     subscribe => File[$war],
-    notify    => Service[$fcrepo3::tomcat_service]
+    # HACK Creates dependency cycle as Tomcat service is
+    # precondition for fcrepo3::install
+    # notify    => Service[$fcrepo3::tomcat_service]
   }
 
   Exec {
