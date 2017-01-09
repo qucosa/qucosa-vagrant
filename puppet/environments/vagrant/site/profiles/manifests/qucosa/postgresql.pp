@@ -16,7 +16,7 @@ class profiles::qucosa::postgresql {
   }
 
   postgresql::server::pg_hba_rule { $database:
-    address     => '0.0.0.0/0',
+    address     => '127.0.0.1/32',
     auth_method => 'md5',
     database    => $database,
     type        => 'host',
