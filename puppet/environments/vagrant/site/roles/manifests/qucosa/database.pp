@@ -1,3 +1,5 @@
 class roles::qucosa::database inherits roles::qucosa {
-  include profiles::qucosa::postgresql
+  class { 'profiles::qucosa::postgresql':
+    before => Class['profiles::qucosa::fcrepo3']
+  }
 }
