@@ -21,7 +21,7 @@ class swordapp (
   -> Class['swordapp::install']
   -> Class['swordapp::config']
   -> Class['swordapp::deploy']
-  anchor { 'swordapp::_end': }
+  -> anchor { 'swordapp::_end': }
 
   class { 'swordapp::install':
     sword_home     => $sword_home,
