@@ -44,9 +44,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                         librarian-puppet install --verbose"
   end
 
+  # HACK Restart Tomcat container to ensure webapps start *after* database
+  config.vm.provision "restart", type:"shell", run:"always" do |shell|
+        shell.inline = "if (dpkg -s tomcat7); then service tomcat7 restart; fi"
+  end
+
   config.vm.provision "puppet", type:"shell", run:"never" do |shell|
         shell.inline = "puppet apply --verbose \
                         /etc/puppetlabs/code/environments/vagrant/manifests/site.pp \
                         --environmentpath=/etc/puppetlabs/code/environments/ --environment=vagrant"
   end
+
 end
