@@ -13,10 +13,14 @@ VirtualBox VM containing a fully configured Qucosa Repository system.
 ## Usage
 
 1. Clone the Git repository
-2. Run `vagrant up` to install, run and provision the Virtual Machine
+2. Run `vagrant up` to install, run and provision the Virtual Machine.
 3. Run the `getip.sh` script to obtain the IP of the VM just started
-4. Connect your browser to http://`IP_OF_VM`:8080/fedora and see the Repository
-   Description Page.
+4. Connect your browser to http://`IP_OF_VM`:8080/fedora/describe and see the
+   Repository Description Page.
+   Check the Elasticsearch installation via http://`IP_OF_VM`:9200
+5. Also, there is port forwarding to `localhost:4711` for accessing Tomcat and
+   `localhost:4712 for Elasticsearch`
+6. Please consult the [Known Issues](#known-issues) section.
 
 ## DNS support
 
@@ -33,6 +37,24 @@ The file has support for [vagrant-cachier](https://github.com/fgrehm/vagrant-cac
 
 # Known Issues
 
+## Fedora not running or Qucosa Content Model objects are missing after `vagrant
+up`
+
+This can happen, since the Puppet modules provisioning all the pieces fail to
+ensure that the database is started and ready. Also there is no way in ensuring
+a fixed startup sequence for the Tomcat webapps. These programms where
+build to be deployed by hand one-by-one, they may crash and stop the startup
+process. Which in turn stops also stops proper deployment of the Content Model Objects.
+
+To workaround this use a sequence of commands when creating the Vagrant machine:
+
+```
+vagrant up
+vagrant reload --provision
+```
+
+After that the Qucosa Content Model objects should be available.
+
 ## VirtualBox Guest Additions not installed or outdated
 
 If you get the following message when you do ```vagrant up``` means that the Virtual Guest Additions are not installed or outdated:
@@ -46,10 +68,10 @@ If you get the following message when you do ```vagrant up``` means that the Vir
     default: 
     default: This is not an error message; everything may continue to work properly,
 ```
-Fortunately there is the Vagrant plugin ```vagrant-vbguest``` that helps you with the installation of the VirtualBox Guest Additions. To install go to the directory that contains the ```Vagrantfile``` and type the following command:
+Fortunately there is the Vagrant plugin ```vagrant-vbguest``` that helps you with the installation of the VirtualBox Guest Additions. To install go to the directory that contains the ```Vagrantfile``` and type the following command depending on your Vagrant version:
 
-- Vagrant < 1.1.5: ```$ vagrant gem install vagrant-vbguest```
 - Vagrant >= 1.1.5: ```$ vagrant plugin install vagrant-vbguest```
+- Vagrant < 1.1.5: ```$ vagrant gem install vagrant-vbguest```
 
 Further information: http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/
 
