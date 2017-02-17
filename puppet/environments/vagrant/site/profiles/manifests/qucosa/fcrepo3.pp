@@ -88,7 +88,7 @@ class profiles::qucosa::fcrepo3(
     warfile_name => 'saxon.war'
   }
 
-  $qucosa_cmodel_version  = '1.1.2'
+  $qucosa_cmodel_version  = '1.2.0'
   $qucosa_cmodel_url      = "https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/${qucosa_cmodel_version}.tar.gz"
   $qucosa_cmodel_filename = "qucosa-fcrepo-contentmodel-${qucosa_cmodel_version}"
 
