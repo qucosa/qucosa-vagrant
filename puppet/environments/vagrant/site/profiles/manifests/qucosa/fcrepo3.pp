@@ -61,7 +61,7 @@ class profiles::qucosa::fcrepo3(
 
   $qucosa_git_url = 'https://github.com/qucosa'
 
-  $mets_version   = '1.4.1'
+  $mets_version   = '1.4.2'
   $mets_war_name  = "qucosa-metsdisseminator-${mets_version}.war"
   fcrepo3::service { 'mets':
     source       => "${qucosa_git_url}/qucosa-fcrepo-metsdisseminator/releases/download/v${mets_version}/${mets_war_name}",
