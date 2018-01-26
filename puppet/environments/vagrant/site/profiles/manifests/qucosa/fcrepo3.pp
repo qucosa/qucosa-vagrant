@@ -61,7 +61,7 @@ class profiles::qucosa::fcrepo3(
 
   $qucosa_git_url = 'https://github.com/qucosa'
 
-  $mets_version   = '1.4.2'
+  $mets_version   = '2.0.1'
   $mets_war_name  = "qucosa-metsdisseminator-${mets_version}.war"
   fcrepo3::service { 'mets':
     source       => "${qucosa_git_url}/qucosa-fcrepo-metsdisseminator/releases/download/v${mets_version}/${mets_war_name}",
@@ -71,7 +71,7 @@ class profiles::qucosa::fcrepo3(
     }
   }
 
-  $epicur_version  = '1.1.1'
+  $epicur_version  = '1.1.4'
   $epicur_war_name = "qucosa-epicurdisseminator-${epicur_version}.war"
   fcrepo3::service { 'epicur':
     source       => "${qucosa_git_url}/qucosa-fcrepo-epicurdisseminator/releases/download/v${epicur_version}/${epicur_war_name}",
@@ -88,7 +88,7 @@ class profiles::qucosa::fcrepo3(
     warfile_name => 'saxon.war'
   }
 
-  $qucosa_cmodel_version  = '1.2.0'
+  $qucosa_cmodel_version  = '1.2.4'
   $qucosa_cmodel_url      = "https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/${qucosa_cmodel_version}.tar.gz"
   $qucosa_cmodel_filename = "qucosa-fcrepo-contentmodel-${qucosa_cmodel_version}"
 

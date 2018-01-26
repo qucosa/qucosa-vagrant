@@ -1,6 +1,6 @@
 class profiles::qucosa::swordapp {
 
-  $sword_version = '1.6.3'
+  $sword_version = '1.6.4'
   $qucosa_filehandler_version = '1.4.5'
 
   $release_url = 'https://github.com/qucosa/qucosa-sword-filehandler/releases/download'
