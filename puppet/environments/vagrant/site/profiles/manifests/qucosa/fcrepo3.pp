@@ -24,6 +24,7 @@ class profiles::qucosa::fcrepo3(
   }
 
   Class['profiles::java7']
+  ->Class['profiles::qucosa::postgresql']
   ->Class['::tomcat::install']
   ->Class['::fcrepo3']
   ~>Class['::tomcat::service']
