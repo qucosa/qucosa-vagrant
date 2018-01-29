@@ -38,13 +38,11 @@ class profiles::qucosa::elasticsearch (
   }
 
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
-    module_dir => 'kopf',
     url        => "https://github.com/lmenezes/elasticsearch-kopf/archive/v${kopf_version}.zip",
     instances  => $elasticsearch_instance
   }
 
   elasticsearch::plugin { 'fedora-river':
-    module_dir => 'fedora-river',
     url        => $river_release,
     instances  => $elasticsearch_instance
   }
