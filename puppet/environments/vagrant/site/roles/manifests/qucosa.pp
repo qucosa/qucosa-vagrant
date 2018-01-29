@@ -7,7 +7,11 @@ class roles::qucosa {
   }
 
   # Configure network interfaces from Hiera
-  $interfaces = hiera('network::interfaces', false)
+  $interfaces = lookup( {
+    'name'          => 'network::interfaces',
+    'default_value' => false }
+  )
+
   if $interfaces {
     class { 'network':
       interfaces_hash => $interfaces
