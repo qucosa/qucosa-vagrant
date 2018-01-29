@@ -6,20 +6,6 @@ class roles::qucosa {
     locales        => ['en_US.UTF-8 UTF-8', 'de_DE.UTF-8 UTF-8']
   }
 
-  # Configure network interfaces from Hiera
-  $interfaces = lookup( {
-    'name'          => 'network::interfaces',
-    'default_value' => false }
-  )
-
-  if $interfaces {
-    class { 'network':
-      interfaces_hash => $interfaces
-    }
-  } else {
-    notice('No network interfaces configured in ENC')
-  }
-
   # Configure VM Guest Additions if necessary
   case $::productname {
     'VMware Virtual Platform': { include profiles::vmware::guest }
