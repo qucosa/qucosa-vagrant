@@ -44,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                         librarian-puppet install --verbose"
   end
 
-  config.vm.provision "puppet", type:"shell", run:"never" do |shell|
+  config.vm.provision "puppet", type:"shell" do |shell|
         shell.inline = "puppet apply --verbose \
                         /etc/puppetlabs/code/environments/vagrant/manifests/site.pp \
                         --environmentpath=/etc/puppetlabs/code/environments/ --environment=vagrant"
