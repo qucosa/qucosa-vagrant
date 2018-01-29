@@ -87,6 +87,37 @@ class profiles::qucosa::fcrepo3(
     }
   }
 
+  $winibwppn_version   = '1.1.0'
+  $winibwppn_war_name  = "qucosa-fcrepo-winibwppn-${winibwppn_version}.war"
+  fcrepo3::service { 'winibwppn':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-winibwppn/releases/download/v${winibwppn_version}/${winibwppn_war_name}",
+    warfile_name => $winibwppn_war_name,
+    parameters   => {
+      'fedora.host.url' => "http://${::fcrepo3::fedora_serverHost}:8080/${::fcrepo3::fedora_serverContext}"
+    }
+  }
+
+  $xmetadissplus_version  = '1.0.3'
+  $xmetadissplus_war_name = "qucosa-fcrepo-xmetadissplus-${xmetadissplus_version}.war"
+  fcrepo3::service { 'xmetadissplus':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-xmetadissplus/releases/download/v${xmetadissplus_version}/${xmetadissplus_war_name}",
+    warfile_name => $xmetadissplus_war_name
+  }
+
+  $dc_version  = '1.1.1'
+  $dc_war_name = "qucosa-fcrepo-dcdisseminator-${dc_version}.war"
+  fcrepo3::service { 'dc':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-dcdisseminator/releases/download/v${dc_version}/${dc_war_name}",
+    warfile_name => $dc_war_name
+  }
+
+  $zip_version  = '1.0.2'
+  $zip_war_name = "qucosa-fcrepo-zipdisseminator-${zip_version}.war"
+  fcrepo3::service { 'zip':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-zipdisseminator/releases/download/v${zip_version}/${zip_war_name}",
+    warfile_name => $zip_war_name
+  }
+
   fcrepo3::service { 'saxon':
     source       => 'puppet:///modules/profiles/qucosa/saxon.war',
     warfile_name => 'saxon.war'
