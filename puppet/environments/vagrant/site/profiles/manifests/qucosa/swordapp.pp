@@ -9,10 +9,12 @@ class profiles::qucosa::swordapp {
   $workspace = 'Qucosa SWORD workspace'
 
   include
-    profiles::java7,
-    profiles::tomcat
+    profiles::java7
 
-  Class['profiles::java7']->Class['profiles::tomcat']->Class['::swordapp']
+  Class['profiles::java7']
+  ->Class['::tomcat::install']
+  ->Class['::swordapp']
+  ~>Class['::tomcat::service']
 
   class { '::swordapp':
     sword_version => $sword_version

@@ -23,9 +23,12 @@ class profiles::qucosa::fcrepo3(
     fail("qucosa_purl_url must be defined for environment: ${environment}")
   }
 
-  Class['profiles::java7']->Class['profiles::tomcat']->Class['::fcrepo3']
+  Class['profiles::java7']
+  ->Class['::tomcat::install']
+  ->Class['::fcrepo3']
+  ~>Class['::tomcat::service']
 
-  class { 'profiles::tomcat':
+  Class { '::tomcat':
     package => 'tomcat7',
     service => 'tomcat7',
     jvmopts => 'JAVA_OPTS="-Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:+UseConcMarkSweepGC -XX:MaxPermSize=512m"'
