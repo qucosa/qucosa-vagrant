@@ -37,24 +37,6 @@ The file has support for [vagrant-cachier](https://github.com/fgrehm/vagrant-cac
 
 # Known Issues
 
-## Fedora not running or Qucosa Content Model objects are missing after `vagrant
-up`
-
-This can happen, since the Puppet modules provisioning all the pieces fail to
-ensure that the database is started and ready. Also there is no way in ensuring
-a fixed startup sequence for the Tomcat webapps. These programms where
-build to be deployed by hand one-by-one, they may crash and stop the startup
-process. Which in turn stops also stops proper deployment of the Content Model Objects.
-
-To workaround this use a sequence of commands when creating the Vagrant machine:
-
-```
-vagrant up
-vagrant reload --provision
-```
-
-After that the Qucosa Content Model objects should be available.
-
 ## VirtualBox Guest Additions not installed or outdated
 
 If you get the following message when you do ```vagrant up``` means that the Virtual Guest Additions are not installed or outdated:

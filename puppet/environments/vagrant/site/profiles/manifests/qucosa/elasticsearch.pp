@@ -1,10 +1,7 @@
 class profiles::qucosa::elasticsearch (
-
   $elasticsearch_instance = 'es-qucosa-default',
   $elasticsearch_replicas = '0',
   $elasticsearch_heapsize = '1g',
-
-  $elasticsearch_java_install = true,
 
   $fedora_url      = 'http://localhost:8080/fedora',
   $fedora_username = 'fedoraAdmin',
@@ -12,6 +9,9 @@ class profiles::qucosa::elasticsearch (
   $jms_broker_url  = 'failover:(tcp://localhost:61616)'
 
 ) {
+
+  include
+    profiles::java7
 
   $river_version = '1.1.1'
   $river_disturl = 'https://github.com/qucosa/elasticsearch-river-fedora/releases/download'
@@ -27,7 +27,6 @@ class profiles::qucosa::elasticsearch (
       'cluster.name'             => $elasticsearch_instance,
       'index.number_of_replicas' => $elasticsearch_replicas
     },
-    java_install => $elasticsearch_java_install,
     manage_repo  => true,
     repo_version => $elasticsearch_release
   }
@@ -39,13 +38,11 @@ class profiles::qucosa::elasticsearch (
   }
 
   elasticsearch::plugin { 'lmenezes/elasticsearch-kopf':
-    module_dir => 'kopf',
     url        => "https://github.com/lmenezes/elasticsearch-kopf/archive/v${kopf_version}.zip",
     instances  => $elasticsearch_instance
   }
 
   elasticsearch::plugin { 'fedora-river':
-    module_dir => 'fedora-river',
     url        => $river_release,
     instances  => $elasticsearch_instance
   }

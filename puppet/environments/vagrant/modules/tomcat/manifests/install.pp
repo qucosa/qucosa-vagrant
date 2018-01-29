@@ -1,18 +1,12 @@
-class profiles::tomcat(
+class tomcat::install(
   $package = 'tomcat7',
   $service = 'tomcat7',
   $jvmopts = ''
 ) {
 
   package { $package:
-    ensure          => 'installed',
+    ensure => 'installed',
     install_options => '--no-install-recommends'
-  }
-
-  service { $service:
-    ensure  => 'running',
-    enable  => true,
-    require => Package[$package]
   }
 
   if !empty($jvmopts) {

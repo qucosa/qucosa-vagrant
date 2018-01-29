@@ -1,10 +1,12 @@
 class profiles::qucosa::oaiprovider {
 
   include
-    profiles::java7,
-    profiles::tomcat
+    profiles::java7
 
-  Class['profiles::java7']->Class['profiles::tomcat']->Class['::oaiprovider']
+  Class['profiles::java7']
+  ->Class['::tomcat::install']
+  ->Class['::oaiprovider']
+  ~>Class['::tomcat::service']
 
   #  oaiprovider::metadataformat { 'mets':
   #    loc   => 'http://www.loc.gov/standards/mets/mets.xsd',

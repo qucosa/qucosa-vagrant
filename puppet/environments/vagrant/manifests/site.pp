@@ -10,4 +10,4 @@ stage { 'post-main':
 # Default path for exec resource
 Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
-hiera_include('classes')
+lookup('classes', {merge => unique}).include

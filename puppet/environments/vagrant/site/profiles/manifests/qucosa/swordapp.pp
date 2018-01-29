@@ -1,6 +1,6 @@
 class profiles::qucosa::swordapp {
 
-  $sword_version = '1.6.3'
+  $sword_version = '1.6.4'
   $qucosa_filehandler_version = '1.4.5'
 
   $release_url = 'https://github.com/qucosa/qucosa-sword-filehandler/releases/download'
@@ -9,10 +9,12 @@ class profiles::qucosa::swordapp {
   $workspace = 'Qucosa SWORD workspace'
 
   include
-    profiles::java7,
-    profiles::tomcat
+    profiles::java7
 
-  Class['profiles::java7']->Class['profiles::tomcat']->Class['::swordapp']
+  Class['profiles::java7']
+  ->Class['::tomcat::install']
+  ->Class['::swordapp']
+  ~>Class['::tomcat::service']
 
   class { '::swordapp':
     sword_version => $sword_version

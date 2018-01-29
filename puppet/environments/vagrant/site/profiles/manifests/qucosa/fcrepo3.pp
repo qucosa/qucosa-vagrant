@@ -23,9 +23,13 @@ class profiles::qucosa::fcrepo3(
     fail("qucosa_purl_url must be defined for environment: ${environment}")
   }
 
-  Class['profiles::java7']->Class['profiles::tomcat']->Class['::fcrepo3']
+  Class['profiles::java7']
+  ->Class['profiles::qucosa::postgresql']
+  ->Class['::tomcat::install']
+  ->Class['::fcrepo3']
+  ~>Class['::tomcat::service']
 
-  class { 'profiles::tomcat':
+  Class { '::tomcat':
     package => 'tomcat7',
     service => 'tomcat7',
     jvmopts => 'JAVA_OPTS="-Djava.awt.headless=true -Xms1024m -Xmx1024m -XX:+UseConcMarkSweepGC -XX:MaxPermSize=512m"'
@@ -61,7 +65,7 @@ class profiles::qucosa::fcrepo3(
 
   $qucosa_git_url = 'https://github.com/qucosa'
 
-  $mets_version   = '1.4.2'
+  $mets_version   = '2.0.1'
   $mets_war_name  = "qucosa-metsdisseminator-${mets_version}.war"
   fcrepo3::service { 'mets':
     source       => "${qucosa_git_url}/qucosa-fcrepo-metsdisseminator/releases/download/v${mets_version}/${mets_war_name}",
@@ -71,7 +75,7 @@ class profiles::qucosa::fcrepo3(
     }
   }
 
-  $epicur_version  = '1.1.1'
+  $epicur_version  = '1.1.4'
   $epicur_war_name = "qucosa-epicurdisseminator-${epicur_version}.war"
   fcrepo3::service { 'epicur':
     source       => "${qucosa_git_url}/qucosa-fcrepo-epicurdisseminator/releases/download/v${epicur_version}/${epicur_war_name}",
@@ -83,12 +87,43 @@ class profiles::qucosa::fcrepo3(
     }
   }
 
+  $winibwppn_version   = '1.1.0'
+  $winibwppn_war_name  = "qucosa-fcrepo-winibwppn-${winibwppn_version}.war"
+  fcrepo3::service { 'winibwppn':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-winibwppn/releases/download/v${winibwppn_version}/${winibwppn_war_name}",
+    warfile_name => $winibwppn_war_name,
+    parameters   => {
+      'fedora.host.url' => "http://${::fcrepo3::fedora_serverHost}:8080/${::fcrepo3::fedora_serverContext}"
+    }
+  }
+
+  $xmetadissplus_version  = '1.0.3'
+  $xmetadissplus_war_name = "qucosa-fcrepo-xmetadissplus-${xmetadissplus_version}.war"
+  fcrepo3::service { 'xmetadissplus':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-xmetadissplus/releases/download/v${xmetadissplus_version}/${xmetadissplus_war_name}",
+    warfile_name => $xmetadissplus_war_name
+  }
+
+  $dc_version  = '1.1.1'
+  $dc_war_name = "qucosa-fcrepo-dcdisseminator-${dc_version}.war"
+  fcrepo3::service { 'dc':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-dcdisseminator/releases/download/v${dc_version}/${dc_war_name}",
+    warfile_name => $dc_war_name
+  }
+
+  $zip_version  = '1.0.2'
+  $zip_war_name = "qucosa-fcrepo-zipdisseminator-${zip_version}.war"
+  fcrepo3::service { 'zip':
+    source       => "${qucosa_git_url}/qucosa-fcrepo-zipdisseminator/releases/download/v${zip_version}/${zip_war_name}",
+    warfile_name => $zip_war_name
+  }
+
   fcrepo3::service { 'saxon':
     source       => 'puppet:///modules/profiles/qucosa/saxon.war',
     warfile_name => 'saxon.war'
   }
 
-  $qucosa_cmodel_version  = '1.2.0'
+  $qucosa_cmodel_version  = '1.2.4'
   $qucosa_cmodel_url      = "https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/${qucosa_cmodel_version}.tar.gz"
   $qucosa_cmodel_filename = "qucosa-fcrepo-contentmodel-${qucosa_cmodel_version}"
 
