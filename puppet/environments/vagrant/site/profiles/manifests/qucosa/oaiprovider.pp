@@ -20,6 +20,12 @@ class profiles::qucosa::oaiprovider {
     diss => 'info:fedora/*/qucosa:SDef/getEpicurDissemination'
   }
 
+  oaiprovider::metadataformat { 'xmetadissplus':
+    loc  => 'http://www.d-nb.de/standards/xmetadiss/xmetadiss.xsd',
+    uri  => 'http://www.d-nb.de/standards/xMetaDiss/',
+    diss => 'info:fedora/*/qucosa:SDef/xMetaDissPlusDissemination'
+  }
+
   # Must appear after metaformat type because of compile-time dependencies
   include ::oaiprovider
 
