@@ -124,7 +124,7 @@ class profiles::qucosa::fcrepo3(
   }
 
   $qucosa_cmodel_version  = '1.2.6'
-  $qucosa_cmodel_url      = "https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/${qucosa_cmodel_version}.tar.gz"
+  $qucosa_cmodel_url      = "https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/v${qucosa_cmodel_version}.tar.gz"
   $qucosa_cmodel_filename = "qucosa-fcrepo-contentmodel-${qucosa_cmodel_version}"
 
   exec { 'download-qucosa-contentmodel':
