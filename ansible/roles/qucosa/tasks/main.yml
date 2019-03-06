@@ -1,0 +1,16 @@
+---
+- name: Set Fedora URL
+  set_fact:
+      fedora_service_url: "http://{{ fedora_serverHost }}:{{ tomcat_http_port }}/{{ fedora_serverContext }}"
+
+- name: Wait for Fedora to start
+  uri:
+    url: "{{ fedora_service_url }}/describe"
+    status_code: 200
+  register: wait_for_fedora
+  until: wait_for_fedora | success
+  retries: 10
+  delay: 3
+
+- name: Include Qucosa Content Model tasks
+  include: contentmodel.yml

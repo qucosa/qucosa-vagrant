@@ -1,0 +1,35 @@
+---
+- name: Ensure directories
+  file:
+      path: "{{ item }}"
+      state: directory
+  with_items:
+      - /opt/fcrepo3
+      - /opt/fcrepo3/download
+      - /opt/fcrepo3/config
+      - /opt/fcrepo3/data
+
+- name: Download Fedora 3 Installer
+  get_url:
+      url: https://github.com/fcrepo3/fcrepo/releases/download/v3.8.1/fcrepo-installer-3.8.1.jar
+      dest: /opt/fcrepo3/download/fcrepo-installer-3.8.1.jar
+      checksum: sha1:c46a1be52c7756339059f26d6356b04a3633d259
+  register: installer_download
+
+- name: Prepare installer config file
+  template:
+      src: install.properties.j2
+      dest: /opt/fcrepo3/config/install.properties
+  register: installer_config
+
+- name: Run Installer
+  shell: java -jar /opt/fcrepo3/download/fcrepo-installer-3.8.1.jar /opt/fcrepo3/config/install.properties
+  when: installer_config.changed or installer_download.changed
+  notify: restart tomcat8
+
+- name: Assign Tomcat group ownership for Fedora directories
+  file:
+      path: /opt/fcrepo3
+      group: tomcat8
+      mode: g+rwxs
+      recurse: true

@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: fcrepo3
+  - role: elasticsearch13

@@ -1,0 +1,79 @@
+---
+- name: Ensure directories
+  file:
+      path: "{{ item }}"
+      state: directory
+  with_items:
+      - /usr/share/elasticsearch/plugins
+      - /opt/elasticsearch/download/fedora-river-1.1.1
+      - /opt/elasticsearch/config
+
+- name: Ensure unzip command
+  package:
+      name: unzip
+      state: latest
+#
+# Kopf plugin
+#
+
+- name: Download Kopf plugin
+  get_url:
+      url: https://github.com/lmenezes/elasticsearch-kopf/archive/v1.6.2.tar.gz
+      dest: /opt/elasticsearch/download
+      checksum: sha1:13496ea9ae4300eca277005311c305d8b0ac8e6f
+
+- name: Extract Kopf plugin
+  unarchive:
+      src: /opt/elasticsearch/download/elasticsearch-kopf-1.6.2.tar.gz
+      dest: /opt/elasticsearch/download
+
+- name: Install Kopf plugin
+  file:
+      src: /opt/elasticsearch/download/elasticsearch-kopf-1.6.2
+      dest: /usr/share/elasticsearch/plugins/kopf
+      state: link
+  notify: restart elasticsearch
+
+
+#
+# Fedora River Plugin
+#
+
+- name: Download Fedora River plugin
+  get_url:
+      url: https://github.com/qucosa/elasticsearch-river-fedora/releases/download/v1.1.1/fedora-river-1.1.1.zip
+      dest: /opt/elasticsearch/download/fedora-river-1.1.1.zip
+      checksum: sha1:0eaa932e98fb176fcaf0fa7485952c9cadc682b9
+
+- name: Extract Fedora River plugin
+  unarchive:
+      src: /opt/elasticsearch/download/fedora-river-1.1.1.zip
+      dest: /opt/elasticsearch/download/fedora-river-1.1.1
+
+- name: Install Fedora River plugin
+  file:
+      src: /opt/elasticsearch/download/fedora-river-1.1.1
+      dest: /usr/share/elasticsearch/plugins/fedora-river
+      state: link
+  notify: restart elasticsearch
+
+- name: Configure Fedora River plugin
+  vars:
+      jms_broker_url: failover:(tcp://localhost:61616)
+      fedora_url: http://localhost:8080/fedora
+      fedora_password: fedoraAdmin
+      fedora_username: fedoraAdmin
+  template:
+      src: fedora-river.json.j2
+      dest: /opt/elasticsearch/config/fedora-river.json
+
+- name: Deploy Fedora River configuration
+  uri:
+      url: http://localhost:9200/_river/fedora/_meta
+      method: POST
+      body_format: json
+      body: "{{ lookup('file', '/opt/elasticsearch/config/fedora-river.json') }}"
+      status_code:
+          - 200
+          - 201
+  notify: restart elasticsearch

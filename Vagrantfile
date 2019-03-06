@@ -1,54 +1,47 @@
 VAGRANTFILE_API_VERSION = "2"
 
+$post_up_message = <<-MSG
+------------------------------------------------------
+Local Qucosa Repository, accessible at localhost (127.0.0.1)
+
+URLS:
+- Fedora            - http://localhost:4711/fedora/
+- Tomcat Manager    - http://localhost:4711/manager/html
+- Elasticsearch     - http://localhost:4712/
+- ES Kopf Plugin    - http://localhost:4712/_plugin/kopf
+- ActiveMQ          - tcp://localhost:4713
+------------------------------------------------------
+MSG
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "puppetlabs/debian-7.8-64-puppet"
-  config.vm.box_version = "1.0.4"
+    config.vm.hostname = "qucosa"
+    config.vm.box = "debian/stretch64"
 
-  config.vm.define "standalone"
-  config.vm.hostname = "qucosa.vagrant.dev"
-  config.vm.network "private_network", type: :dhcp
+    # Force vagrant to mount shared folder instead of using troubled rsync
+    config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
-  if Vagrant.has_plugin?("vagrant-cachier")
-      config.cache.scope = :box
-  end
+    config.vm.network :forwarded_port, guest:8080, host:4711  # Tomcat
+    config.vm.network :forwarded_port, guest:9200, host:4712  # Elasticsearch
+    config.vm.network :forwarded_port, guest:61616, host:4713 # ActiveMQ
 
-  if Vagrant.has_plugin?("landrush")
-    config.landrush.enabled = true
-    config.landrush.tld = "qucosa.vagrant.dev"
-  else
-    config.vm.network :forwarded_port, guest:8080, host:4711
-    config.vm.network :forwarded_port, guest:9200, host:4712
-    config.vm.network :forwarded_port, guest:61616, host:4713
-  end
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 2048
+        v.cpus   = 2
+    end
 
-  config.vm.provider "virtualbox" do |v|
-      v.memory = 2048
-      v.cpus   = 2
-  end
-
-  config.vm.synced_folder "puppet/environments/vagrant", "/etc/puppetlabs/code/environments/vagrant"
-
-  config.vm.provision "bootstrap", type:"shell" do |shell|
-        shell.inline = "apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys 7F438280EF8D349F &&
-                        apt-get update --fix-missing &&
+    config.vm.provision "upgrade", type: "shell" do |shell|
+        shell.inline = "apt-get update --fix-missing &&
                         apt-get upgrade -y &&
-                        apt-get install git ruby -y &&
-                        /opt/puppetlabs/puppet/bin/gem install librarian-puppet &&
-                        ln -fs ../puppet/bin/librarian-puppet /opt/puppetlabs/bin/librarian-puppet"
-  end
+                        apt-get autoremove &&
+                        apt-get autoclean"
+    end
 
-  config.vm.provision "librarian", type:"shell" do |shell|
-        shell.inline = "cd /opt/puppetlabs/puppet &&
-                        rm -rf Puppetfile modules/ &&
-                        librarian-puppet init &&
-                        cp /etc/puppetlabs/code/environments/vagrant/Puppetfile . &&
-                        librarian-puppet install --verbose"
-  end
+    config.vm.provision "ansible", type: "ansible_local" do |ansible|
+        ansible.become = true
+        ansible.playbook = "ansible/playbook.yml"
+        ansible.compatibility_mode = "2.0"
+    end
 
-  config.vm.provision "puppet", type:"shell" do |shell|
-        shell.inline = "puppet apply --verbose \
-                        /etc/puppetlabs/code/environments/vagrant/manifests/site.pp \
-                        --environmentpath=/etc/puppetlabs/code/environments/ --environment=vagrant"
-  end
+    config.vm.post_up_message = $post_up_message
 
 end
