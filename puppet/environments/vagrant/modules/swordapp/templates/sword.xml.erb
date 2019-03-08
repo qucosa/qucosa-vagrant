@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="<%= @home_bin_war %>">
-    <Loader className="org.apache.catalina.loader.VirtualWebappLoader"
-        virtualClasspath="<%= @home_lib %>/*.jar"/>
-    <Parameter name="project.properties" value="<%= @home_config %>/properties.xml" override="false"/>
-    <Parameter name="log-config" value="<%= @home_config %>/log4j.xml" override="false"/>
-</Context>
-
