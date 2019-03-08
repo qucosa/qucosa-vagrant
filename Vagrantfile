@@ -7,6 +7,7 @@ Local Qucosa Repository, accessible at localhost (127.0.0.1)
 URLS:
 - Fedora            - http://localhost:4711/fedora/
 - Tomcat Manager    - http://localhost:4711/manager/html
+- SWORDv1 provider  - http://localhost:4711/sword
 - Elasticsearch     - http://localhost:4712/
 - ES Kopf Plugin    - http://localhost:4712/_plugin/kopf
 - ActiveMQ          - tcp://localhost:4713

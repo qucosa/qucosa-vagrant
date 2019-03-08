@@ -1,4 +1,5 @@
 ---
 dependencies:
   - role: fcrepo3
+  - role: swordapp
   - role: elasticsearch13

@@ -1,0 +1,63 @@
+<properties>
+
+    <fedora>
+        <external_obj_url>{{ external_obj_url }}</external_obj_url>
+        <external_ds_url>{{ external_ds_url }}</external_ds_url>
+        <protocol>http</protocol>
+        <host>{{ host }}</host>
+        <port>{{ port }}</port>
+        <pid_namespace>{{ pid_namespace }}</pid_namespace>
+    </fedora>
+
+    <general>
+        <repository_uri>{{ repository_uri }}</repository_uri>
+        <temp_dir>/tmp</temp_dir>
+        <sub-service-documents>/sub_service_documents</sub-service-documents>
+        <entry-location>/tmp/sword_entries</entry-location>
+    </general>
+
+    <file_handlers>
+        <handler class="org.purl.sword.server.fedora.fileHandlers.QucosaMETSFileHandler" />
+        <handler class="org.purl.sword.server.fedora.fileHandlers.ZipMETSFileHandler" />
+    </file_handlers>
+
+    <files>
+        <mime-type>WEB-INF/mime-types.xml</mime-type>
+    </files>
+
+    <service_document>
+        <level>1</level>
+        <noOp>true</noOp>
+        <verbose>true</verbose>
+
+        <workspace title="Qucosa SWORD workspace">
+
+{%  for key, col in collections.iteritems() %}
+            <collection  collection_pid="{{ key }}" mediation="true">
+                    <deposit_url>{{ col['deposit_url'] }}</deposit_url>
+                    <title>{{ col['title'] }}</title>
+                    <abstract>{{ col['abstract'] }}</abstract>
+                    <policy>{{ col['policy'] }}</policy>
+                    <treatment>Preservation actions may occur on submited deposits</treatment>
+                    <users>
+{% for user in col['users'] %}
+                            <user>{{ user }}</user>
+{% endfor %}
+                    </users>
+                    <accepts>
+{% for mediatype in col['accepts'] %}
+                            <accept>{{ mediatype }}</accept>
+{% endfor %}
+                    </accepts>
+                    <packaging>
+{% for package in col['packaging'] %}
+                            <package quality="{{ package['quality'] }}">{{ package['type'] }}</package>
+{% endfor %}
+                    </packaging>
+                </collection>
+{% endfor %}
+        </workspace>
+
+    </service_document>
+
+</properties>

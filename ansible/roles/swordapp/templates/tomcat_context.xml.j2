@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="{{ path }}" docBase="{{ doc_base }}">
+    <Resources>
+        <PostResources
+            base="{{ sword_home_dir }}/lib"
+            className="org.apache.catalina.webresources.DirResourceSet"
+            webAppMount="/WEB-INF/classes"/>
+    </Resources>
+    <Parameter name="project.properties" value="{{ sword_home_dir }}/config/properties.xml" override="false"/>
+    <Parameter name="log-config" value="{{ sword_home_dir }}/config/log4j.xml" override="false"/>
+</Context>
