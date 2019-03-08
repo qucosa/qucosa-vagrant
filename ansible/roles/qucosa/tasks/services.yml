@@ -1,0 +1,21 @@
+---
+- name: Deploy Saxon XSLT Servlet
+  copy:
+    src: saxon.war
+    dest: /var/lib/tomcat8/webapps
+
+- name: Download Disseminator web services
+  get_url:
+    url: "{{ item.value.url }}/{{ item.value.war }}"
+    dest: "/opt/fcrepo3/download/{{ item.value.war }}"
+    checksum: "{{ item.value.checksum }}"
+  with_dict: "{{ services }}"
+
+- name: Deploy Disseminator web services
+  vars:
+    path: "/{{ item.key }}"
+    doc_base: "/opt/fcrepo3/download/{{ item.value.war }}"
+  template:
+    src: tomcat-context.xml.j2
+    dest: "/etc/tomcat8/Catalina/localhost/{{ item.key }}.xml"
+  with_dict: "{{ services }}"
