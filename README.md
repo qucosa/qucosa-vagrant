@@ -8,7 +8,14 @@ VirtualBox VM containing a fully configured Qucosa Repository system.
 - Git
 - VirtualBox
 - Vagrant
+- Vagrant plugin vagrant-vbguest
 - Quick Internet connection (because it's going to download a lot of stuff)
+
+### Installing vagrant-vbguest
+
+Folder mount is done via filesystem type `vboxfs` which is part of Virtualbox Guest tools. Without shared mounted shared folder Ansible cannot provision the system. To ensure the up-to-date version of Guest Tools install `vagrant-vbguest` Vagrant plugin:
+
+```$ vagrant plugin install vagrant-vbguest```
 
 ## Usage
 
