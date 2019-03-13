@@ -1,0 +1,20 @@
+---
+external_obj_url: "{{ fedora_service_url }}/get/##PID##"
+external_ds_url: "{{ fedora_service_url }}/objects/##PID##/methods/qucosa:SDef/getMETSDissemination"
+host: "{{ fedora_serverHost }}"
+port: "{{ tomcat_http_port }}"
+pid_namespace: qucosa
+repository_uri: "http://{{ host }}:{{ port }}/sword"
+
+collections:
+  "qucosa:all":
+    title: "Qucosa General Collection"
+    abstract: "This is a collection of all Qucosa objects"
+    policy: "This collection accepts any deposit on behalf of the `sword` user"
+    deposit_url: "{{ repository_uri }}/##COLLECTION_PID##"
+    users:
+      - sword
+    accepts:
+      - application/vnd.qucosa.mets+xml
+    packaging:
+      - { quality: "0.9", type: "http://www.loc.gov/METS/"}

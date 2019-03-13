@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="{{ path }}" docBase="{{ doc_base }}">
+{% if 'params' in item.value %}
+{%  for key, value in item.value['params'].iteritems() %}
+    <Parameter name="{{ key }}" value="{{ value }}" override="false"/>
+{%  endfor %}
+{% endif %}
+</Context>

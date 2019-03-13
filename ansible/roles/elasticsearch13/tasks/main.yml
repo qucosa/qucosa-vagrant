@@ -1,0 +1,38 @@
+---
+- name: Prepare Elasticsearch folder
+  file:
+      path: /opt/elasticsearch/download
+      state: directory
+
+- name: Download ancient Elasticsearch 1.3
+  get_url:
+      url: https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.3.9.deb
+      dest: /opt/elasticsearch/download/elasticsearch-1.3.9.deb
+      checksum: sha1:277409c9c6cc9a25efbdd37dd08725becd4675a8
+
+- name: Install Elasticsearch
+  apt:
+      deb: /opt/elasticsearch/download/elasticsearch-1.3.9.deb
+
+- name: Enable Elasticsearch on boot
+  service:
+      name: elasticsearch
+      enabled: yes
+
+- name: Start Elasticsearch
+  service:
+      name: elasticsearch
+      state: started
+
+- name: Wait for Elasticsearch to start
+  uri:
+      url: "http://localhost:9200"
+      status_code: 200
+  register: wait_for_elasticsearch
+  until: wait_for_elasticsearch | success
+  retries: 10
+  delay: 3
+
+- name: Install plugins
+  include: plugins.yml
+  notify: restart elasticsearch

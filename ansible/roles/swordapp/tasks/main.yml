@@ -1,0 +1,53 @@
+---
+- name: Set Fedora URL
+  set_fact:
+      fedora_service_url: "http://{{ fedora_serverHost }}:{{ tomcat_http_port }}/{{ fedora_serverContext }}"
+
+- name: Ensure directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt/swordapp
+    - /opt/swordapp/bin
+    - /opt/swordapp/config
+    - /opt/swordapp/lib
+    - /opt/swordapp/log
+
+- name: Download SWORD provider
+  get_url:
+      url: https://github.com/qucosa/sword-fedora/releases/download/v1.6.4/sword-fedora-1.6.4.war
+      dest: /opt/swordapp/bin/sword-fedora-1.6.4.war
+      checksum: sha1:ff0ded3ae19c0ac717c6dc54d8f8ba5942bb5de9
+
+- name: Download Qucosa SWORD file handler
+  get_url:
+      url: https://github.com/qucosa/qucosa-sword-filehandler/releases/download/v1.4.5/qucosa-sword-filehandler-1.4.5.jar
+      dest: /opt/swordapp/lib/qucosa-sword-filehandler-1.4.5.jar
+      checksum: sha1:8e2af4a174a9761fd0c46b3ef0a50437d302002a
+
+- name: Prepare SWORD provider configuration
+  template:
+    src: properties.xml.j2
+    dest: /opt/swordapp/config/properties.xml
+
+- name: Copy logging configuration
+  copy:
+    src: log4j.xml
+    dest: /opt/swordapp/config
+
+- name: Assign Tomcat group ownership for SWORD provider directories
+  file:
+      path: /opt/swordapp
+      group: tomcat8
+      mode: g+rwxs
+      recurse: true
+
+- name: Deploy SWORD provider application
+  vars:
+    path: "/sword"
+    sword_home_dir: "/opt/swordapp"
+    doc_base: "{{ sword_home_dir }}/bin/sword-fedora-1.6.4.war"
+  template:
+    src: tomcat_context.xml.j2
+    dest: /etc/tomcat8/Catalina/localhost/sword.xml

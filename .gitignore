@@ -1,2 +1,2 @@
+ansible/playbook.retry
 .vagrant
-vagrant_ansible_inventory_default

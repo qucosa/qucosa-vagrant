@@ -1,0 +1,46 @@
+---
+apia_auth_required: "false"
+apia_ssl_required: "false"
+apim_ssl_required: "false"
+
+fedora_admin_password: "fedoraAdmin"
+fedora_home: "/opt/fcrepo3"
+fedora_serverContext: "fedora"
+fedora_serverHost: "localhost"
+
+database_driver: "included"
+database_jdbcDriverClass: "org.apache.derby.jdbc.EmbeddedDriver"
+database_jdbcURL: "jdbc:derby:{{ fedora_home }}/data/derby/fedora3;create=true"
+database_password: "fedoraAdmin"
+database_username: "fedoraAdmin"
+database: "included"
+
+deploy_local_services: "false"
+
+fesl_authz_enabled: "false"
+
+install_type: "custom"
+
+keystore_file: "included"
+
+llstore_type: "akubra-fs"
+
+messaging_enabled: "true"
+messaging_uri: "vm:(broker:(tcp://{{ fedora_serverHost }}:61616))"
+
+ri_enabled: "true"
+
+servlet_engine: "existingTomcat"
+
+ssl_available: "true"
+
+tomcat_home: "/var/lib/tomcat8"
+tomcat_http_port: "8080"
+tomcat_shutdown_port: "8005"
+tomcat_ssl_port: "8443"
+
+unattended: "true"
+
+upstream_auth_enabled: "false"
+
+xacml_enabled: "false"

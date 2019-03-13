@@ -1,0 +1,33 @@
+---
+- name: Download Qucosa Content Model
+  get_url:
+      url: https://github.com/qucosa/qucosa-fcrepo-contentmodel/archive/v1.2.6.tar.gz
+      dest: /opt/fcrepo3/download/qucosa-fcrepo-contentmodel-1.2.6.tar.gz
+      checksum: sha1:0de3bb96e959a0400e7f978c7f5a55ad9241c1d2
+
+- name: Extract Qucosa Content Model
+  unarchive:
+      src: /opt/fcrepo3/download/qucosa-fcrepo-contentmodel-1.2.6.tar.gz
+      dest: /opt/fcrepo3/download
+      creates: /opt/fcrepo3/download/qucosa-fcrepo-contentmodel-1.2.6/objects
+  register: extract_contentmodel
+
+- name: Deploy Qucosa Content Model
+  uri:
+      url: "{{ fedora_service_url }}/objects/new?format=info:fedora/fedora-system:FOXML-1.1&ignoreMime=true"
+      method: POST
+      user: fedoraAdmin
+      password: "{{ fedora_admin_password }}"
+      headers:
+            Content-Type: "text/xml"
+      body: "{{ lookup('file', '/opt/fcrepo3/download/qucosa-fcrepo-contentmodel-1.2.6/objects/{{ item }}') }}"
+      status_code:
+        - 200
+        - 201
+  when: extract_contentmodel.changed
+  with_items:
+      - qucosa_CModel.xml
+      - qucosa_SDef.xml
+      - qucosa_SDep.xml
+      - qucosa_XSLT.xml
+      - qucosa_OAI.foxml

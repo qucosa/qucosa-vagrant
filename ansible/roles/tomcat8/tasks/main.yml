@@ -1,0 +1,16 @@
+---
+- name: Install Tomcat 8
+  package:
+      name: "{{ item }}"
+      state: latest
+      update_cache: yes
+  with_items:
+      - tomcat8
+      - tomcat8-admin
+
+- name: Replace Tomcat 8 user configuration
+  copy:
+      src: tomcat-users.xml
+      dest: /etc/tomcat8
+  notify: restart tomcat8
+
